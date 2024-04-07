@@ -1,0 +1,23 @@
+.landing-bg {
+  background-image: url("../images//landing-bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-bg h1 {
+    font-weight: 700;
+}
+
+.landing-login {
+    text-decoration: none;
+    color: #C70000;
+}
+
+.landing-login :hover{
+    scale: 1.1;
+    color: red;
+}

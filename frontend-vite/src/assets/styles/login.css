@@ -1,0 +1,20 @@
+.login-container {
+    background-color: #1e1e1e;
+}
+
+.header-container {
+    background-color: #0e0e0e;
+}
+
+.login-container h1 {
+    font-weight: 700;
+}
+
+.signup-button {
+    text-decoration: none;
+    color: #C70000;
+}
+
+.signup-button :hover{
+    color: red;
+}

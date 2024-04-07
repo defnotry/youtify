@@ -1,0 +1,115 @@
+.page-bg {
+  background-color: #1e1e1e;
+}
+
+.side-navigation {
+  background-color: #2c2c2c;
+}
+
+.profile-card {
+  margin-left: 32px;
+  background-color: #2c2c2c;
+}
+
+.profile-card:hover {
+  background-color: #2f2f2f;
+  scale: 1.03;
+  cursor: pointer;
+}
+
+.profile-img {
+  margin-left: 10px;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+}
+
+.side-nav-item {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.side-nav-item-selector {
+  font-size: 20px;
+  color: white;
+  text-decoration: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 50px;
+  transition: padding-left 0.3s ease; /* Transition for padding-left */
+}
+
+.side-nav-item-selector:hover {
+  scale: 1.1;
+}
+
+.side-nav-item-selector.active {
+  background-color: #1e1e1e;
+  color: #c70000;
+  border-right: 5px solid #c70000;
+  padding-left: 45px; /* Adjust as needed */
+  font-weight: 700;
+}
+
+.side-nav-logo {
+  margin-right: 10px;
+}
+
+.your-playlist-title {
+  margin: 20px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.playlist-container {
+  background-color: #2f2f2f;
+  width: 90%;
+  height: 300px;
+  margin-bottom: 10%;
+  max-height: 300px; /* Example height, adjust as needed */
+  overflow-y: auto; /* Enable vertical scrollbar if content exceeds container height */
+}
+
+
+/* AUDIO PLAYER */
+/* custom.css or your CSS file */
+/* Change the background color of the audio player */
+.rhap_container {
+  background-color: #1e1e1e !important; /* Replace with your desired color */
+  border-top: #2c2c2c solid 2px;
+}
+
+/* Change the color of the progress bar */
+.rhap_progress-filled {
+  background-color: #4caf50; /* Replace with your desired color */
+}
+
+/* Change the color of the volume bar */
+.rhap_volume-filled {
+  background-color: #2196f3; /* Replace with your desired color */
+}
+
+/* Change the color of the play/pause button */
+.rhap_play-pause-button {
+  color: #C70000 !important; /* Replace with your desired color */
+}
+
+/* Change the color of the time display */
+.rhap_time {
+  color: #333; /* Replace with your desired color */
+}
+
+/* Change the color of the volume icon */
+.rhap_volume-icon {
+  color: #9c27b0; /* Replace with your desired color */
+}
+
+
+.artist-profile{
+  border-radius: 1000px;
+  border: #2c2c2c solid 1px;
+  box-shadow: #2c2c2c;
+  width: 300px;
+  height: 300px;
+}
