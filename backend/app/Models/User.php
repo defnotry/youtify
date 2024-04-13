@@ -44,4 +44,14 @@ class User extends Authenticatable
         'password' => 'hashed',
         'user_type' => 'string',
     ];
+
+    public function albums()
+    {
+        return $this->hasMany(Album::class);
+    }
+
+    public function songs()
+    {
+        return $this->hasMany(Song::class);
+    }
 }

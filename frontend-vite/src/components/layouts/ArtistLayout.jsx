@@ -1,10 +1,11 @@
 import { Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStateContext } from "../../contexts/ContextProvider";
 import axiosClient from "../../axios-client";
 import { Outlet } from "react-router-dom";
 import ArtistSideNav from "../SideNavs/ArtistSideNav";
 import { Dropdown } from "react-bootstrap";
+import UploadModal from "../Artist/UploadModal";
 
 import H5AudioPlayer from "react-h5-audio-player";
 
@@ -20,6 +21,11 @@ import {
 
 export default function ArtistLayout() {
   const { user, token, setUser } = useStateContext();
+
+  const [showUploadModal, setShowUploadModal] = useState(false);
+
+  const handleShowUploadModal = () => setShowUploadModal(true);
+  const handleCloseUploadModal = () => setShowUploadModal(false);
 
   useEffect(() => {
     axiosClient.get("/user").then(({ data }) => {
@@ -50,7 +56,7 @@ export default function ArtistLayout() {
                 </div>
               </Dropdown.Toggle>
               <Dropdown.Menu>
-                <Dropdown.Item className="mb-2">
+                <Dropdown.Item className="mb-2" onClick={handleShowUploadModal}>
                   <FontAwesomeIcon icon={faMusic} /> Music
                 </Dropdown.Item>
 
@@ -69,6 +75,7 @@ export default function ArtistLayout() {
 
         <div className="d-flex flex-column flex-grow-1 position-relative">
           <Outlet />
+          <UploadModal show={showUploadModal} handleClose={handleCloseUploadModal} />
           <div className="position-absolute bottom-0 w-100 audio-player">
             <H5AudioPlayer />
           </div>

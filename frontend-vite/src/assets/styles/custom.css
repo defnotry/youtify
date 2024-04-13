@@ -113,3 +113,73 @@
   width: 300px;
   height: 300px;
 }
+
+.dropzone {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  border: #00c700 dashed 1px;
+  height: 100px;
+}
+
+.upload-music-modal {
+  background-color: #2c2c2c !important;
+}
+
+.modal-custom-input {
+  background-color: #1e1e1e !important;
+  border: #0e0e0e solid 1px !important;
+  box-shadow: #0e0e0e;
+  color: white;
+}
+
+.modal-custom-input::placeholder {
+  color: gray !important;
+}
+
+.modal-custom-input:focus {
+  border-color: #c70000 !important; /* Change to your desired color */
+  box-shadow: 0 0 0 0.2rem rgba(199, 0, 0, 0.25) !important; 
+}
+
+.album-photo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 300px;
+}
+
+.album-photo {
+  border: #c70000 solid 1px;
+  border-radius: 20px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+/* CSS */
+.custom-file-input-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: auto; /* Adjust as needed */
+  height: auto; /* Adjust as needed */
+}
+
+.custom-file-input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 20px; /* Adjust as needed */
+  cursor: pointer;
+  opacity: 0;
+}

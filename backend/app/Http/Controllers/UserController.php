@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         return UserResource::collection(
-            User::query()->orderBy('id','desc')->paginate(10)
+            User::query()->orderBy('id', 'desc')->paginate(10)
         );
     }
 
@@ -27,8 +27,9 @@ class UserController extends Controller
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
-        return response(new UserResource($user), 201);
+        return new UserResource($user); // Return the transformed resource directly
     }
+
 
     /**
      * Display the specified resource.
@@ -38,8 +39,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return new UserResource($user);
+        $userResource = new UserResource($user);
+        return response()->json(['data' => $userResource], 200);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -56,8 +59,9 @@ class UserController extends Controller
         }
         $user->update($data);
 
-        return new UserResource($user);
+        return response()->json(['message' => 'User updated successfully'], 200);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -77,7 +81,7 @@ class UserController extends Controller
 
     public function getArtists()
     {
-        $artists = User::where('user_type','artist')->get();
+        $artists = User::where('user_type', 'artist')->get();
         return response()->json($artists);
     }
 }
