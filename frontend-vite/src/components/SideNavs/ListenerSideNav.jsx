@@ -81,11 +81,6 @@ function ListenerSideNav() {
               <PlaylistItem playlistName="Test Playlist 2" />
             </div>
           </div>
-          <div className="d-flex justify-content-center">
-            <button className="btn btn-danger align-self-end mb-3">
-              UPGRADE TO PREMIUM
-            </button>
-          </div>
         </div>
       </aside>
     </div>

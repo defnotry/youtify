@@ -6,16 +6,12 @@ use App\Http\Resources\SongResource;
 use App\Models\Album;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 class SongController extends Controller
 {
-
-    public function index()
-    {
-        $songs = Song::orderBy('id', 'desc')->paginate(10);
-        return SongResource::collection($songs);
-    }
-
     public function store(Request $request, Album $album)
     {
         $request->validate([
@@ -35,9 +31,9 @@ class SongController extends Controller
         // Handle file upload
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $filename = $file->hashName(); // This generates a unique hash for the file
             $path = $file->storeAs('public/songs', $filename);
-            $song->file_path = $path; // Assuming you have a 'file_path' column in your 'songs' table
+            $song->file_path = $path;
         }
 
         $song->save();
@@ -47,33 +43,25 @@ class SongController extends Controller
         return response()->json($song, 201);
     }
 
-    public function show($id)
+    public function getSongsByArtist(Request $request)
     {
-        $song = Song::findOrFail($id);
-        return new SongResource($song);
+        $artistId = $request->user()->id;
+
+        $songs = Song::where('artist_id', $artistId)->get();
+
+        return response()->json(['songs' => $songs], 200);
     }
 
-    public function update(Request $request, $id)
+    public function getSongsByAlbum(Album $album)
     {
-        $song = Song::findOrFail($id);
+        $songs = Song::where('album_id', $album->id)->get();
 
-        $data = $request->validate([
-            'album_id' => 'required|exists:albums,id',
-            'user_id' => 'required|exists:users,id',
-            'song_title' => 'required|string',
-            // Add more validation rules as needed
-        ]);
-
-        $song->update($data);
-        return new SongResource($song);
+        return response()->json(['songs' => $songs], 200);
     }
 
-    public function destroy($id)
+    public function play(Song $song)
     {
-        $song = Song::findOrFail($id);
-        $song->delete();
-
-        return response('', 204);
+        $path = storage_path('app/' . $song->file_path);
+        return response()->file($path);
     }
-
 }

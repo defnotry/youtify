@@ -1,28 +1,39 @@
 import axios from "axios";
 
-
 const axiosClient = axios.create({
-    baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`
+  baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,
+  withCredentials: true,
+  headers: {
+    "bypass-tunnel-reminder": "anyvalue",
+  },
 });
 
-axiosClient.interceptors.request.use((config) => {
-    const token = localStorage.getItem('ACCESS_TOKEN');
-    console.log('Bearer token:', token); // Add this line for debugging
-    config.headers.Authorization = `Bearer ${token}`;
+axiosClient.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("ACCESS_TOKEN");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      config.headers["bypass-tunnel-reminder"] = "anyvalue";
+    }
+
     return config;
-});
+  },
+  (error) => Promise.reject(error)
+);
 
-
-axiosClient.interceptors.response.use((response) => {
+axiosClient.interceptors.response.use(
+  (response) => {
     return response;
-}, (error) => {
-    const {response} = error;
+  },
+  (error) => {
+    const { response } = error;
 
     if (response.status === 401) {
-        localStorage.removeItem('ACCESS_TOKEN');
+      localStorage.removeItem("ACCESS_TOKEN");
     }
 
     throw error;
-});
+  }
+);
 
 export default axiosClient;

@@ -7,8 +7,6 @@ import ArtistSideNav from "../SideNavs/ArtistSideNav";
 import { Dropdown } from "react-bootstrap";
 import UploadModal from "../Artist/UploadModal";
 
-import H5AudioPlayer from "react-h5-audio-player";
-
 import "../../assets/styles/custom.css";
 import ArtistProfileCard from "../Cards/ArtistProfileCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -50,8 +48,7 @@ export default function ArtistLayout() {
             <Dropdown className="bg-dark">
               <Dropdown.Toggle className="d-flex border-success bg-success align-items-center">
                 <div className="d-flex justify-content-between align-items-center">
-
-            <FontAwesomeIcon icon={faPlusCircle} className="mr-2" />
+                  <FontAwesomeIcon icon={faPlusCircle} className="mr-2" />
                   <div>Upload</div>
                 </div>
               </Dropdown.Toggle>
@@ -75,10 +72,10 @@ export default function ArtistLayout() {
 
         <div className="d-flex flex-column flex-grow-1 position-relative">
           <Outlet />
-          <UploadModal show={showUploadModal} handleClose={handleCloseUploadModal} />
-          <div className="position-absolute bottom-0 w-100 audio-player">
-            <H5AudioPlayer />
-          </div>
+          <UploadModal
+            show={showUploadModal}
+            handleClose={handleCloseUploadModal}
+          />
         </div>
       </div>
     </div>

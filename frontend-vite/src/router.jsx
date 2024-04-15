@@ -21,6 +21,7 @@ import AdminSubscriptionPricing from './views/admins/AdminSubscriptionPricing';
 import ArtistLayout from './components/layouts/ArtistLayout';
 import AccessDenied from "./views/AccessDenied";
 import ArtistProfile from './views/artists/ArtistProfile';
+import ArtistAllSongs from "./views/artists/ArtistAllSongs";
 
 const router = createBrowserRouter([
   {
@@ -96,6 +97,10 @@ const router = createBrowserRouter([
       {
         path: "/artist/profile",
         element: <ArtistProfile />
+      },
+      {
+        path: "/artist/all-songs",
+        element: <ArtistAllSongs />
       }
     ]
   },

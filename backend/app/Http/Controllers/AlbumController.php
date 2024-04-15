@@ -7,6 +7,7 @@ use App\Http\Resources\AlbumResource;
 use App\Models\Album;
 use App\Models\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image as ImageIntervention;
 
 
@@ -22,6 +23,14 @@ class AlbumController extends Controller
         );
     }
 
+    public function getAllAlbums()
+    {
+        $albums = Album::orderBy('id', 'desc')->get();
+        return response()->json($albums);
+    }
+
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -36,34 +45,17 @@ class AlbumController extends Controller
         $album->description = $request->description;
         $album->artist_id = $request->artist_id;
 
-        //handle photo upload using Laravel's built-in file storage
+        // Handle photo upload using Laravel's built-in file storage
         if ($request->hasFile('photo')) {
-            $filename = $request->file('photo')->store('public/images/albums');
-            $album->photo = basename($filename);
+            // Store the file in the public disk and get the URL
+            $url = $request->file('photo')->storePublicly('images/albums', 'public');
+            $album->photo = $url;
         }
         $album->save();
 
         return response()->json($album, 201);
     }
 
-
-    public function update(UpdateAlbumRequest $request, Album $album)
-    {
-        $data = $request->validated();
-        // Handle file upload or storage here
-        $album->update($data);
-        return new AlbumResource($album); // Return the transformed resource directly
-    }
-    public function show(Album $album)
-    {
-        return new AlbumResource($album);
-    }
-
-    public function destroy(Album $album)
-    {
-        $album->delete();
-        return response("", 204);
-    }
 
 
 }

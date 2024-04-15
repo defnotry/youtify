@@ -45,6 +45,11 @@ class User extends Authenticatable
         'user_type' => 'string',
     ];
 
+    public function isArtist()
+    {
+        return $this->user_type === 'artist';
+    }
+
     public function albums()
     {
         return $this->hasMany(Album::class);
@@ -52,6 +57,6 @@ class User extends Authenticatable
 
     public function songs()
     {
-        return $this->hasMany(Song::class);
+        return $this->hasMany(Song::class, 'artist_id');
     }
 }

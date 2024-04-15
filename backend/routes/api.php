@@ -19,11 +19,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/listeners', [UserController::class, 'getListeners']);
     Route::get('/artists', [UserController::class, 'getArtists']);
 
-    Route::get('/genres', [GenreController::class, 'index'])->middleware('artist');
     Route::resource('artists', ArtistController::class);
 
-    Route::post('/albums/create-album', [AlbumController::class, 'store'])->middleware('artist');
-    Route::post('/albums/{album}/songs/upload-songs', [SongController::class, 'store'])->middleware('artist');
+    Route::middleware('artist')->group(function () {
+        Route::get('/genres', [GenreController::class, 'index']);
+        Route::post('/albums/create-album', [AlbumController::class, 'store']);
+        Route::post('/albums/{album}/songs/upload-songs', [SongController::class, 'store']);
+        Route::get('/songs', [SongController::class, 'getSongsByArtist']);
+    });
+    
+    Route::get('/albums', [AlbumController::class,'getAllAlbums']);
+
+
+    Route::get('/songs/{song}/play', [SongController::class, 'play']);
+    Route::get('/albums/{album}/songs', [SongController::class, 'getSongsByAlbum']);
 });
 
 

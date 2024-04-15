@@ -41,7 +41,7 @@ export default function ListenerLayout() {
           </div>
           <ProfileCard username={user?.name || "Guest"} />
         </header>
-        <div className="vh-100 p-5">
+        <div className="d-flex flex-column flex-grow-1 position-relative">
           <Outlet />
         </div>
       </div>

@@ -8,7 +8,7 @@ class Song extends Model
 {
     protected $fillable = [
         'album_id',
-        'user_id',
+        'artist_id',
         'song_title',
     ];
 
@@ -17,9 +17,9 @@ class Song extends Model
         return $this->belongsTo(Album::class);
     }
 
-    public function user()
+    public function artist()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'artist_id');
     }
 
     public function genres()
